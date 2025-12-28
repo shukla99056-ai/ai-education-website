@@ -76,3 +76,60 @@
 
 </body>
 </html>
+<section>
+  <h2>AI Topic Explainer</h2>
+
+  <label for="classSelect">Class:</label>
+  <select id="classSelect">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <!-- ... upto 12 -->
+    <option value="12">12</option>
+  </select>
+
+  <label for="subjectSelect">Subject:</label>
+  <select id="subjectSelect">
+    <option value="Physics">Physics</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Math">Math</option>
+    <option value="Biology">Biology</option>
+    <option value="CS">Computer Science</option>
+    <option value="GK">General Knowledge</option>
+  </select>
+
+  <br><br>
+  <textarea id="topicInput" placeholder="Type your topic here..."></textarea><br>
+  <button id="explainBtn">Explain Topic</button>
+
+  <p id="responseBox"></p>
+</section>
+<script>
+const demoDatabase = {
+  "Physics": {
+    "Class 10": {
+      "Newton's Laws": "Newton's Laws of Motion explain how objects move..."
+    }
+  },
+  "Math": {
+    "Class 9": {
+      "Pythagoras Theorem": "In a right-angled triangle, a² + b² = c²..."
+    }
+  }
+};
+
+function explainTopic() {
+  const cls = document.getElementById('classSelect').value;
+  const subject = document.getElementById('subjectSelect').value;
+  const topic = document.getElementById('topicInput').value.trim();
+  const responseBox = document.getElementById('responseBox');
+
+  if(demoDatabase[subject] && demoDatabase[subject]["Class " + cls] && demoDatabase[subject]["Class " + cls][topic]) {
+    responseBox.textContent = demoDatabase[subject]["Class " + cls][topic] + " (Demo Mode)";
+  } else {
+    responseBox.textContent = "AI is explaining '" + topic + "' for Class " + cls + " " + subject + "... (Demo Mode)";
+  }
+}
+
+document.getElementById('explainBtn').addEventListener('click', explainTopic);
+</script>
+Added Class/Subject dropdown + AI demo integration
