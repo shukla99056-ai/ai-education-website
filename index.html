@@ -6,84 +6,190 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;text-align:center}
-header{background:#0a58ca;color:#fff;padding:25px}
-section{padding:20px}
-select,textarea{padding:10px;margin:6px;font-size:16px}
-textarea{width:90%;max-width:520px;height:120px}
-button{padding:12px 22px;font-size:16px;background:#198754;color:#fff;border:none;border-radius:5px;cursor:pointer}
-button:hover{background:#145c32;}
-#responseBox{margin-top:20px;text-align:left;max-width:700px;margin:auto;background:#fff;padding:15px;border-radius:6px;white-space:pre-line;}
-footer{background:#222;color:#fff;padding:15px;margin-top:30px;}
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f6f8;
+  margin:0;
+  text-align:center;
+}
+header{
+  background:#0a58ca;
+  color:#fff;
+  padding:30px 15px;
+}
+section{ padding:20px; }
+
+select, textarea{
+  padding:10px;
+  margin:6px;
+  font-size:16px;
+}
+textarea{
+  width:90%;
+  max-width:600px;
+  height:120px;
+}
+
+button{
+  padding:12px 25px;
+  font-size:16px;
+  background:#198754;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+button:hover{ background:#145c32; }
+
+/* ANSWER BOX STYLE (DIFFERENT COLOR) */
+#responseBox{
+  margin-top:25px;
+  max-width:750px;
+  margin-left:auto;
+  margin-right:auto;
+  background:#fff8dc;
+  border-left:6px solid #0a58ca;
+  padding:20px;
+  text-align:left;
+  white-space:pre-line;
+  font-size:16px;
+  color:#000;
+}
+
+footer{
+  background:#222;
+  color:#fff;
+  padding:15px;
+  margin-top:40px;
+}
+footer a{
+  color:#9ecbff;
+  text-decoration:none;
+  margin:0 6px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>📘 Vishal Learning</h1>
-<p>Free Education Platform for Class 6–10 Students</p>
+  <h1>📘 Vishal Learning</h1>
+  <p>Free Education Platform for Class 6–10 Students</p>
 </header>
 
 <section>
-<h2>Explain Any Topic</h2>
+  <h2>Explain Any Topic</h2>
+  <p>Select class, subject and type topic name</p>
 
-<select id="classSelect">
-<option>6</option>
-<option>7</option>
-</select>
+  <select id="classSelect">
+    <option>6</option>
+    <option>7</option>
+    <option>8</option>
+    <option>9</option>
+    <option>10</option>
+  </select>
 
-<select id="subjectSelect">
-<option>Physics</option>
-<option>Chemistry</option>
-<option>Math</option>
-</select>
+  <select id="subjectSelect">
+    <option>Physics</option>
+    <option>Chemistry</option>
+    <option>Math</option>
+  </select>
 
-<br>
-<textarea id="topicInput" placeholder="Example: Motion"></textarea><br>
-<button onclick="explainTopic()">Explain Topic</button>
+  <br>
 
-<div id="responseBox"></div>
+  <textarea id="topicInput" placeholder="Example: Motion"></textarea><br>
+  <button onclick="explainTopic()">Explain Topic</button>
+
+  <div id="responseBox"></div>
 </section>
 
 <footer>
-<p>Created by Vishal Shukla | Powered by GitHub Pages</p>
+  <p>
+    <a href="about.html">About Us</a> |
+    <a href="contact.html">Contact Us</a> |
+    <a href="privacy.html">Privacy Policy</a>
+  </p>
+  <p>Created by Vishal Shukla | Powered by GitHub Pages</p>
 </footer>
 
 <script>
+/* REAL EXPLANATION DATABASE */
 const database = {
+
   Physics: {
     "Class 6": {
-      "Motion": `Motion is the change in position of an object with time.
+      "Motion": `🔹 Motion (Class 6 – Physics)
 
-Types of Motion:
-1. Rectilinear Motion – motion in a straight line.
-Example: A car moving on a straight road.
+Motion is the change in position of an object with time, with respect to a reference point.
 
-2. Circular Motion – motion along a circular path.
-Example: Hands of a clock.
+👉 If an object does not change its position, it is said to be at rest.
+👉 If its position changes, it is said to be in motion.
 
-3. Periodic Motion – motion that repeats at regular intervals.
-Example: Swinging of a pendulum.
+📌 Types of Motion:
 
-Motion helps us understand how objects move around us.`,
-      
-      "Force": `Force is a push or pull that can change the shape, speed, or direction of an object.
-Example: Kicking a football changes its motion.`
+1️⃣ Rectilinear Motion:
+Motion of an object along a straight line.
+Example:
+• A car moving on a straight road
+• A train moving on straight railway track
+
+2️⃣ Circular Motion:
+Motion of an object along a circular path.
+Example:
+• Hands of a clock
+• Rotation of a ceiling fan
+
+3️⃣ Periodic Motion:
+Motion that repeats itself at equal intervals of time.
+Example:
+• Swinging of a pendulum
+• Motion of Earth around the Sun
+
+📘 Importance:
+Understanding motion helps us study speed, distance and direction of objects around us.`,
+
+      "Force": `🔹 Force (Class 6 – Physics)
+
+Force is a push or pull applied on an object.
+
+Effects of Force:
+• Change shape of an object
+• Change speed
+• Change direction
+• Move a stationary object
+
+Example:
+• Pushing a door to open it
+• Kicking a football`
     }
   },
 
   Chemistry: {
     "Class 6": {
-      "Matter": `Matter is anything that has mass and occupies space.
-States of matter: Solid, Liquid, Gas.`
+      "Matter": `🔹 Matter (Class 6 – Chemistry)
+
+Matter is anything that has mass and occupies space.
+
+States of Matter:
+• Solid – fixed shape (stone)
+• Liquid – fixed volume (water)
+• Gas – no fixed shape (air)
+
+Matter is made up of very small particles called atoms and molecules.`
     }
   },
 
   Math: {
     "Class 6": {
-      "Fractions": `A fraction represents a part of a whole.
-Example: 1/2, 3/4`
+      "Fractions": `🔹 Fractions (Class 6 – Math)
+
+A fraction represents a part of a whole.
+
+Example:
+• 1/2 means one part out of two equal parts
+• 3/4 means three parts out of four equal parts
+
+Fractions are used in daily life like sharing food, money etc.`
     }
   }
 };
@@ -94,19 +200,20 @@ function explainTopic(){
   const topic = document.getElementById("topicInput").value.trim();
   const box = document.getElementById("responseBox");
 
-  if(topic===""){
-    box.innerText="Please type a topic name.";
+  if(topic === ""){
+    box.innerText = "❗ Please type a topic name.";
     return;
   }
 
   if(database[sub] && database[sub]["Class "+cls] && database[sub]["Class "+cls][topic]){
     box.innerText = database[sub]["Class "+cls][topic];
   } else {
-    box.innerText = "❌ Topic not added yet.";
+    box.innerText =
+      "❌ Topic not available yet.\n\n" +
+      "Please check spelling or we will add this topic soon.";
   }
 }
 </script>
 
 </body>
 </html>
-Updated detailed explanations for Class 6 topics
