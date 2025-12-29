@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Vishal Learning – Class 6 to 10</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;text-align:center}
 header{background:#0a58ca;color:#fff;padding:25px}
@@ -17,12 +16,23 @@ button:hover{background:#145c32}
   margin-top:20px;
   max-width:800px;
   margin:auto;
-  background:#d1ecf1; /* light blue for answer */
+  background:#d1ecf1;
   padding:18px;
-  border-left:6px solid #0dcaf0; /* colored border for answer */
+  border-left:6px solid #0dcaf0;
   text-align:left;
   white-space:pre-line;
   font-size:16px;
+}
+#availableTopics{
+  margin-top:30px;
+  max-width:800px;
+  margin:auto;
+  background:#fff3cd;
+  padding:15px;
+  border-left:6px solid #ffc107;
+  text-align:left;
+  white-space:pre-line;
+  font-size:15px;
 }
 footer{background:#222;color:#fff;padding:15px;margin-top:30px}
 footer a{color:#9ecbff;text-decoration:none;margin:0 6px}
@@ -32,7 +42,7 @@ footer a{color:#9ecbff;text-decoration:none;margin:0 6px}
 
 <header>
 <h1>📘 Vishal Learning</h1>
-<p>Class 6–10: Physics, Chemistry, Math</p>
+<p>Class 6–10: Physics, Chemistry, Math, Biology, Computer, Hindi, English, Sanskrit</p>
 </header>
 
 <section>
@@ -46,6 +56,13 @@ footer a{color:#9ecbff;text-decoration:none;margin:0 6px}
 <option>Physics</option>
 <option>Chemistry</option>
 <option>Math</option>
+<option>Biology</option>
+<option>Computer</option>
+<option>Hindi</option>
+<option>Hindi Grammar</option>
+<option>English</option>
+<option>English Grammar</option>
+<option>Sanskrit</option>
 </select>
 
 <br>
@@ -53,6 +70,8 @@ footer a{color:#9ecbff;text-decoration:none;margin:0 6px}
 <button onclick="explainTopic()">Explain Topic</button>
 
 <div id="responseBox"></div>
+
+<div id="availableTopics"></div>
 </section>
 
 <footer>
@@ -65,120 +84,81 @@ footer a{color:#9ecbff;text-decoration:none;margin:0 6px}
 </footer>
 
 <script>
-// Combined database with Chemistry Class 9 Metals & Non-metals added
+// Complete Database Part 1,2,3
 const database = {
-  Physics:{
-    "Class 6":{
-      "Motion":`Motion is the change in position of an object with respect to time.
-
-Types of Motion:
-1) Rectilinear motion – motion in a straight line
-2) Circular motion – motion in a circular path
-3) Periodic motion – motion that repeats itself
-
-Examples:
-• Car moving on road – rectilinear
-• Clock hands – circular
-• Pendulum swing – periodic`,
-
-      "Force":`Force is a push or pull that can change the shape, speed or direction of an object.
-
-Example:
-Pushing a door to open it.`
-    },
-    "Class 7":{
-      "Work":`Work = Force × Distance.  
-Example: Pushing a box across floor.`,
-
-      "Energy":`Energy is capacity to do work.  
-Example: Food provides energy to humans.`
-    },
-    "Class 8":{
-      "Light":`Light travels in straight lines.  
-Reflection & refraction explained.  
-Example: Mirror reflection.`,
-
-      "Sound":`Sound is vibration.  
-Pitch, frequency and examples explained.`
-    },
-    "Class 9":{
-      "Laws of Motion":`Newton’s Laws of Motion:
-
-1️⃣ First Law: Object at rest/motion remains unless force acts.
-2️⃣ Second Law: F = m × a
-3️⃣ Third Law: Action = Reaction
-
-Example: Jumping off ground.`,
-
-      "Gravitation":`Gravitation: Force by which objects attract each other.  
-Formula: F = G*(m1*m2)/r²  
-Example: Objects fall to Earth.`
-    },
-    "Class 10":{
-      "Electricity":`Electricity: current, voltage, resistance.  
-Ohm’s Law: V = I × R  
-Example: Bulb glows in circuit.`,
-
-      "Magnetism":`Magnetism: force due to magnets.  
-Example: Compass needle aligns with North.`
-    }
-  },
-
-  Chemistry:{
-    "Class 6":{
-      "Matter":`Matter is anything that has mass and occupies space.  
-States: Solid, Liquid, Gas  
-Example: Stone, Water, Air`
-    },
-    "Class 7":{
-      "Atoms":`Atoms are smallest units of matter.  
-Example: Hydrogen atom.`
-    },
-    "Class 8":{
-      "Chemical Reactions":`Process where substances change into new ones.  
-Example: Rusting of iron.`
-    },
-    "Class 9":{
-      "Atoms":`Atoms are smallest units of matter.  
-Example: Oxygen atom.`,
-      "Metals and Non-metals":`Metals: shiny, hard, conduct electricity.  
-Non-metals: dull, poor conductor.  
-Example: Iron, Sulphur.`
-    },
-    "Class 10":{
-      "Acids and Bases":`Acids produce H⁺, Bases produce OH⁻.  
-pH <7 Acidic, pH=7 Neutral, pH>7 Basic.  
-Example: Lemon juice, Soap.`,
-
-      "Metals and Non-metals":`Metals: shiny, hard, conduct electricity.  
-Non-metals: dull, poor conductor.  
-Example: Iron, Sulphur.`
-    }
-  },
-
-  Math:{
-    "Class 6":{
-      "Fractions":`Fraction represents part of whole.  
-Example: 1/2, 3/4`
-    },
-    "Class 7":{
-      "Algebra":`Algebra uses letters for numbers.  
-Example: x + 5 = 10`
-    },
-    "Class 8":{
-      "Geometry":`Geometry: shapes, angles, figures.  
-Example: Triangle, Square, Circle`
-    },
-    "Class 9":{
-      "Pythagoras Theorem":`Right-angled triangle: Hypotenuse² = Base² + Height²`
-    },
-    "Class 10":{
-      "Quadratic Equations":`Quadratic equation: ax² + bx + c = 0  
-Solved using Factorization or Formula.`
-    }
-  }
+Physics:{
+"Class 6":{"Motion":"Motion is the change in position of an object with respect to time.\nTypes: Rectilinear, Circular, Periodic.\nExample: Car moving, Clock hands, Pendulum."},
+"Class 7":{"Work":"Work = Force × Distance.\nExample: Pushing a box.","Energy":"Energy is the capacity to do work.\nExample: Food provides energy."},
+"Class 8":{"Light":"Light travels in straight lines. Reflection & refraction.\nExample: Mirror reflection.","Sound":"Sound is vibration.\nExample: Guitar string."},
+"Class 9":{"Laws of Motion":"Newton’s Laws explained with examples.","Gravitation":"Gravitational force explained with formula F=G*m1*m2/r^2.\nExample: Objects fall to Earth."},
+"Class 10":{"Electricity":"Current, Voltage, Resistance explained. Ohm's Law.","Magnetism":"Magnetism explained. Compass example."}
+},
+Chemistry:{
+"Class 6":{"Matter":"Matter definition and states (solid, liquid, gas)."},
+"Class 7":{"Atoms":"Atoms are smallest units of matter."},
+"Class 8":{"Chemical Reactions":"Explanation of reactions with examples."},
+"Class 9":{"Atoms":"Atoms explained.","Metals and Non-metals":"Metals and Non-metals with examples."},
+"Class 10":{"Acids and Bases":"Acids/Bases and pH scale.","Metals and Non-metals":"Metals/Non-metals with examples."}
+},
+Math:{
+"Class 6":{"Fractions":"Fractions explained with examples."},
+"Class 7":{"Algebra":"Algebra with examples."},
+"Class 8":{"Geometry":"Geometry with examples."},
+"Class 9":{"Pythagoras Theorem":"Right triangle theorem explained."},
+"Class 10":{"Quadratic Equations":"Quadratic equation solved step by step."}
+},
+Biology:{
+"Class 6":{"Plant Cells":"Structure of plant cells."},
+"Class 7":{"Human Body":"Overview of organs."},
+"Class 8":{"Ecosystem":"Ecosystem components explained."},
+"Class 9":{"Genetics":"Introduction to genes and heredity."},
+"Class 10":{"Evolution":"Darwin’s theory explained."}
+},
+Computer:{
+"Class 6":{"Hardware":"Basic computer hardware."},
+"Class 7":{"Software":"Basic software types."},
+"Class 8":{"Internet":"Internet concepts explained."},
+"Class 9":{"Programming":"Introduction to programming."},
+"Class 10":{"Database":"Database basics explained."}
+},
+Hindi:{
+"Class 6":{"Alphabet":"Hindi vowels and consonants."},
+"Class 7":{"Simple Sentences":"Forming simple sentences."},
+"Class 8":{"Paragraph Writing":"How to write a paragraph."},
+"Class 9":{"Story Writing":"Story composition tips."},
+"Class 10":{"Essay Writing":"Essay writing explained."}
+},
+"Hindi Grammar":{
+"Class 6":{"Nouns":"Definition and examples."},
+"Class 7":{"Pronouns":"Pronouns explained."},
+"Class 8":{"Tenses":"Tenses explained."},
+"Class 9":{"Active Passive":"Active and Passive voice."},
+"Class 10":{"Figures of Speech":"All important figures of speech."}
+},
+English:{
+"Class 6":{"Alphabet":"English vowels and consonants."},
+"Class 7":{"Simple Sentences":"Forming simple sentences."},
+"Class 8":{"Paragraph Writing":"How to write a paragraph."},
+"Class 9":{"Story Writing":"Story composition tips."},
+"Class 10":{"Essay Writing":"Essay writing explained."}
+},
+"English Grammar":{
+"Class 6":{"Nouns":"Definition and examples."},
+"Class 7":{"Pronouns":"Pronouns explained."},
+"Class 8":{"Tenses":"Tenses explained."},
+"Class 9":{"Active Passive":"Active and Passive voice."},
+"Class 10":{"Figures of Speech":"All important figures of speech."}
+},
+Sanskrit:{
+"Class 6":{"Alphabet":"Sanskrit vowels and consonants."},
+"Class 7":{"Simple Sentences":"Forming simple sentences."},
+"Class 8":{"Paragraph Writing":"Paragraph writing examples."},
+"Class 9":{"Story Writing":"Story composition tips."},
+"Class 10":{"Essay Writing":"Essay writing explained."}
+}
 };
 
+// Function to show answer
 function explainTopic(){
   const cls=document.getElementById("classSelect").value;
   const sub=document.getElementById("subjectSelect").value;
@@ -193,6 +173,20 @@ function explainTopic(){
     box.innerText = "❌ Topic not added yet. It will be added soon.";
   }
 }
+
+// Function to show available topics
+function showAvailableTopics(){
+  let text="📌 Available Topics:\n\n";
+  for(let sub in database){
+    for(let cls in database[sub]){
+      text+=`Class ${cls.replace("Class ","")}: ${sub} → `;
+      text+=Object.keys(database[sub][cls]).join(", ")+"\n";
+    }
+  }
+  document.getElementById("availableTopics").innerText=text;
+}
+
+showAvailableTopics();
 </script>
 
 </body>
