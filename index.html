@@ -4802,3 +4802,171 @@ function comparePlayers() {
     `;
 }
 </script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pragyanpath</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
+header { background:#1e3a8a; color:white; text-align:center; padding:20px 0; }
+header h1 { margin:0; font-size:2rem; }
+header p { margin:5px 0 0; font-size:1rem; }
+.container { max-width:1200px; margin:20px auto; padding:0 20px; }
+.subject-section { background:white; border-radius:10px; padding:20px; margin-bottom:20px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+.subject-section h2, .subject-section h3 { margin-top:0; }
+.chapters button { background:#2563eb; color:white; border:none; padding:8px 12px; margin:5px; border-radius:5px; cursor:pointer; }
+.chapters button:hover { background:#1d4ed8; }
+.topic { display:none; margin-top:15px; padding:10px; background:#e0f2fe; border-radius:5px; }
+input[type="text"] { width:100%; padding:8px; margin-bottom:15px; border-radius:5px; border:1px solid #ccc; }
+footer { background:#1e3a8a; color:white; padding:15px; text-align:center; margin-top:20px; }
+footer a { color:white; margin:0 10px; text-decoration:none; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Pragyanpath</h1>
+    <p>Created by Vishal Shukla</p>
+</header>
+
+<div class="container">
+<h2>Online Test & Player Comparison Portal</h2>
+
+<div class="chapters">
+    <h3>Select Class / Exam:</h3>
+    <button onclick="selectExam('class1')">Class 1</button>
+    <button onclick="selectExam('class2')">Class 2</button>
+    <button onclick="selectExam('class3')">Class 3</button>
+    <button onclick="selectExam('class4')">Class 4</button>
+    <button onclick="selectExam('class5')">Class 5</button>
+    <button onclick="selectExam('class6')">Class 6</button>
+    <button onclick="selectExam('class7')">Class 7</button>
+    <button onclick="selectExam('class8')">Class 8</button>
+    <button onclick="selectExam('class9')">Class 9</button>
+    <button onclick="selectExam('class10')">Class 10</button>
+    <button onclick="selectExam('class11')">Class 11</button>
+    <button onclick="selectExam('class12')">Class 12</button>
+    <button onclick="selectExam('iit')">IIT JEE</button>
+    <button onclick="selectExam('iti')">ITI</button>
+    <button onclick="selectExam('neet')">NEET</button>
+    <button onclick="selectExam('cricket')">Cricket</button>
+</div>
+
+<div id="examArea" class="topic">
+    <label>Enter Player Name:</label>
+    <input type="text" id="playerName" placeholder="Your Name">
+    <button onclick="startExam()">Start Test</button>
+
+    <div id="testContent" style="display:none; margin-top:15px;">
+        <div id="questionBox"></div>
+        <button onclick="nextQuestion()">Next</button>
+        <p id="scoreDisplay"></p>
+    </div>
+</div>
+
+<div class="subject-section">
+<h3>Player vs Player Comparison</h3>
+<label>Player 1:</label>
+<input type="text" id="player1" placeholder="Player 1">
+<label>Player 2:</label>
+<input type="text" id="player2" placeholder="Player 2">
+<button onclick="comparePlayers()">Compare</button>
+<div id="comparisonResult" style="margin-top:15px;"></div>
+</div>
+
+</div>
+
+<footer>
+<a href="#">About Us</a> | <a href="#">Contact Us</a> | <a href="#">Privacy Policy</a> | <a href="#">Login</a>
+</footer>
+
+<script>
+// Placeholder question bank for demo
+const questionBank = {
+    class1: [
+        {q:"What is 2+2?", options:["3","4","5"], answer:"4"},
+        {q:"Circle has how many sides?", options:["0","1","2"], answer:"0"}
+    ],
+    class2: [
+        {q:"5+3=?", options:["7","8","9"], answer:"8"},
+        {q:"Square has how many sides?", options:["2","3","4"], answer:"4"}
+    ],
+    cricket: [
+        {q:"Who scored the fastest ODI century?", options:["Sachin","Virat","Rohit"], answer:"Rohit"},
+        {q:"How many overs in T20?", options:["20","50","10"], answer:"20"}
+    ],
+    // Similarly add questions for all other classes/exams
+};
+
+// Track scores
+let playerScores = {};
+let selectedExam = "";
+let currentQ = 0;
+let score = 0;
+
+// Select exam
+function selectExam(exam){
+    selectedExam = exam;
+    document.getElementById('examArea').style.display='block';
+}
+
+// Start test
+function startExam(){
+    const name = document.getElementById('playerName').value;
+    if(!name) { alert("Enter player name"); return; }
+    document.getElementById('testContent').style.display='block';
+    currentQ=0; score=0;
+    if(!playerScores[name]) playerScores[name]=0;
+    showQuestion();
+}
+
+// Show current question
+function showQuestion(){
+    if(currentQ >= questionBank[selectedExam].length){
+        const name = document.getElementById('playerName').value;
+        playerScores[name] = score;
+        document.getElementById('questionBox').innerHTML="Test Completed!";
+        document.getElementById('scoreDisplay').innerText = `${name} Score: ${score} / ${questionBank[selectedExam].length}`;
+        return;
+    }
+    const q = questionBank[selectedExam][currentQ];
+    let html = `<b>Q${currentQ+1}: ${q.q}</b><br>`;
+    q.options.forEach(opt=>{
+        html += `<input type="radio" name="opt" value="${opt}"> ${opt}<br>`;
+    });
+    document.getElementById('questionBox').innerHTML = html;
+}
+
+// Next question
+function nextQuestion(){
+    const q = questionBank[selectedExam][currentQ];
+    const opts = document.getElementsByName('opt');
+    let selected='';
+    opts.forEach(o=>{if(o.checked) selected=o.value;});
+    if(selected === q.answer) score++;
+    currentQ++;
+    showQuestion();
+}
+
+// Compare players
+function comparePlayers(){
+    const p1 = document.getElementById('player1').value;
+    const p2 = document.getElementById('player2').value;
+    if(!p1 || !p2){ alert("Enter both player names"); return; }
+    const score1 = playerScores[p1] || 0;
+    const score2 = playerScores[p2] || 0;
+    let winner = "Tie";
+    if(score1>score2) winner=p1+" wins";
+    else if(score2>score1) winner=p2+" wins";
+    document.getElementById('comparisonResult').innerHTML = `
+        <b>${p1}:</b> ${score1}<br>
+        <b>${p2}:</b> ${score2}<br>
+        <b>Result:</b> ${winner}
+    `;
+}
+</script>
+
+</body>
+</html>
