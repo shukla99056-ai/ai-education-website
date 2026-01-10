@@ -126,7 +126,6 @@ display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px
 }
 </style>
 </head>
-
 <body>
 
 <!-- NAVBAR -->
@@ -228,7 +227,7 @@ Students improve focus, strategy and logic while tracking progress through an EL
 
 <section id="chessGameSection">
 <h2>Chess Mini-Game</h2>
-<p>Level: <span id="chessLevel"></span></p>
+<p>Level: <span id="chessLevelMini"></span></p>
 <p>ELO: <span id="chessElo"></span></p>
 <div id="chessBoard"></div>
 <button onclick="startNewGame()">Start New Game</button>
@@ -268,7 +267,7 @@ Students improve focus, strategy and logic while tracking progress through an EL
 // ===== Service Worker =====
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('assets/js/sw.js')
+    navigator.serviceWorker.register('assets/js/service-worker.js')
     .then(function(registration) {
       console.log('ServiceWorker registered: ', registration);
     }).catch(function(error) {
@@ -304,6 +303,7 @@ function updateElo(result){
   else if(result==="loss") eloScore -= 10;
   else if(result==="draw") eloScore += 0;
   document.getElementById("eloScore").innerText = eloScore;
+  document.getElementById("chessElo").innerText = eloScore;
   updateChessLevel();
 }
 
@@ -312,6 +312,7 @@ function updateChessLevel(){
   else if(eloScore<1500) chessLevel="Intermediate";
   else chessLevel="Advanced";
   document.getElementById("chessLevel").innerText = chessLevel;
+  document.getElementById("chessLevelMini").innerText = chessLevel;
 }
 
 function answerQuiz(isCorrect){
